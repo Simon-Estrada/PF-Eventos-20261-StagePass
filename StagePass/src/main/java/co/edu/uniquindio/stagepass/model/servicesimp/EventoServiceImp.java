@@ -1,14 +1,18 @@
-package co.edu.uniquindio.stagepass.model;
+package co.edu.uniquindio.stagepass.model.servicesimp;
 
+import co.edu.uniquindio.stagepass.model.Enums.Categoria;
+import co.edu.uniquindio.stagepass.model.Enums.EstadoEvento;
 import co.edu.uniquindio.stagepass.model.objects.Asiento;
 import co.edu.uniquindio.stagepass.model.objects.Evento;
 import co.edu.uniquindio.stagepass.model.objects.Recinto;
 import co.edu.uniquindio.stagepass.model.objects.Zona;
+import co.edu.uniquindio.stagepass.model.repositories.EventoRepository;
 import co.edu.uniquindio.stagepass.model.services.EventoService;
 
-import java.security.cert.CertPathBuilderException;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.chrono.ChronoLocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -23,7 +27,7 @@ public class EventoServiceImp implements EventoService {
             throw new IllegalArgumentException("El evento es nulo");
         }
         validarDatos(evento);
-        if(evento.getFecha().isBefore(LocalDateTime.now())){
+        if(evento.getFecha().isBefore(ChronoLocalDate.from(LocalDateTime.now()))){
             throw new IllegalArgumentException("La fecha ingresada no puede ser anterior a la fecha actual");
         }
         evento.setEstado(EstadoEvento.BORRADOR);

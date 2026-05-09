@@ -1,5 +1,6 @@
 package co.edu.uniquindio.stagepass.model.services;
 
+import co.edu.uniquindio.stagepass.model.Enums.Categoria;
 import co.edu.uniquindio.stagepass.model.objects.Asiento;
 import co.edu.uniquindio.stagepass.model.objects.Evento;
 import co.edu.uniquindio.stagepass.model.objects.Recinto;

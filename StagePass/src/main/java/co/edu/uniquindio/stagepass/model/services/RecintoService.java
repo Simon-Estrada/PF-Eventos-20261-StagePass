@@ -3,7 +3,8 @@ package co.edu.uniquindio.stagepass.model.services;
 import co.edu.uniquindio.stagepass.model.objects.Recinto;
 import co.edu.uniquindio.stagepass.model.objects.Zona;
 
-import java.awt.*;
+import java.util.List;
+
 
 public interface RecintoService {
     //Requisitos RF-026
