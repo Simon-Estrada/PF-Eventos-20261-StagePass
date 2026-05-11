@@ -1,5 +1,7 @@
 package co.edu.uniquindio.stagepass.model.objects;
 
+import co.edu.uniquindio.stagepass.model.GeneradorIds;
+
 import java.util.List;
 
 public class Recinto {
@@ -9,8 +11,8 @@ public class Recinto {
     private String ciudad;
     private List<Zona> zonas;
 
-    public Recinto(String idRecinto, String nombre, String direccion, String ciudad) {
-        this.idRecinto = idRecinto;
+    public Recinto(String nombre, String direccion, String ciudad) {
+        this.idRecinto = GeneradorIds.generarIdRecinto();
         this.nombre = nombre;
         this.direccion = direccion;
         this.ciudad = ciudad;

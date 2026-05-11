@@ -1,26 +1,32 @@
 package co.edu.uniquindio.stagepass.model.objects;
 
 import co.edu.uniquindio.stagepass.model.Enums.Rol;
+import co.edu.uniquindio.stagepass.model.GeneradorIds;
+import co.edu.uniquindio.stagepass.model.MetodoPagoUsuario;
+
+import java.util.List;
 
 public class Usuario {
+
     private String idUsuario;
     private String nombre;
     private String correo;
     private String telefono;
     private String contrasena;
     private Rol rol;
-    private List<MetodosPagoUsuario> metodosPago;
-    private List<Pago> historialPagos;
 
-    public Usuario(String idUsuario, String correo, String nombre, String telefono, String contrasena, Rol rol, List<MetodosPagoUsuario> metodosPago, List<Pago> historialPagos) {
-        this.idUsuario = idUsuario;
+    private List<MetodoPagoUsuario> metodosPago;
+    private List<Compra> compras;
+
+    public Usuario(String correo, String nombre, String telefono, String contrasena, Rol rol, List<MetodoPagoUsuario> metodosPago, List<Compra> compras) {
+        this.idUsuario = GeneradorIds.generarIdUsuario();
         this.correo = correo;
         this.nombre = nombre;
         this.telefono = telefono;
         this.contrasena = contrasena;
         this.rol = rol;
         this.metodosPago = metodosPago;
-        this.historialPagos = historialPagos;
+        this.compras = compras;
     }
 
     public String getIdUsuario() {
@@ -71,19 +77,30 @@ public class Usuario {
         this.rol = rol;
     }
 
-    public List<MetodosPagoUsuario> getMetodosPago() {
+    public List<MetodoPagoUsuario> getMetodosPago() {
         return metodosPago;
     }
 
-    public void setMetodosPago(List<MetodosPagoUsuario> metodosPago) {
+    public void setMetodosPago(List<MetodoPagoUsuario> metodosPago) {
         this.metodosPago = metodosPago;
     }
 
-    public List<Pago> getHistorialPagos() {
-        return historialPagos;
+    public List<Compra> getCompras() {
+        return compras;
     }
 
-    public void setHistorialPagos(List<Pago> historialPagos) {
-        this.historialPagos = historialPagos;
+    public void setCompras(List<Compra> compras) {
+        this.compras = compras;
+    }
+
+    @Override
+    public String toString() {
+        return "Usuario{" +
+                "idUsuario='" + idUsuario + '\'' +
+                ", nombre='" + nombre + '\'' +
+                ", correo='" + correo + '\'' +
+                ", telefono='" + telefono + '\'' +
+                ", rol=" + rol +
+                '}';
     }
 }

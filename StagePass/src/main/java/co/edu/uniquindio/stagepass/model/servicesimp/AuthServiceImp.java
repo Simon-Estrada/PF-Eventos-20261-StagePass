@@ -2,6 +2,7 @@ package co.edu.uniquindio.stagepass.model.servicesimp;
 
 import co.edu.uniquindio.stagepass.model.objects.Sesion;
 import co.edu.uniquindio.stagepass.model.objects.Usuario;
+import co.edu.uniquindio.stagepass.model.repositories.UsuarioRepository;
 import co.edu.uniquindio.stagepass.model.services.AuthService;
 
 import java.time.LocalDateTime;
