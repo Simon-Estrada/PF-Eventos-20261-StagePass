@@ -1,9 +1,11 @@
 package co.edu.uniquindio.stagepass.model;
 
+import co.edu.uniquindio.stagepass.model.Enums.Rol;
 import co.edu.uniquindio.stagepass.model.objects.Evento;
 import co.edu.uniquindio.stagepass.model.objects.Usuario;
 import co.edu.uniquindio.stagepass.model.services.AuthService;
 import co.edu.uniquindio.stagepass.model.services.EventoService;
+import co.edu.uniquindio.stagepass.model.services.UsuarioService;
 
 import java.util.List;
 //Esta clase funciona con el Patron Facade puesto que centraliza el acceso
@@ -34,8 +36,8 @@ public class SistemaEventos {
         this.reporteService = reporteService;
         this.authService = authService;
     }
-    public Usuario registrarUsuario(String nombre, String correo, String telefono, String contrasena){
-        return usuarioService.registrar(nombre, correo, telefono, contrasena);
+    public Usuario registrarUsuario(String nombre, String correo, String telefono, String contrasena, Rol rol){
+        return usuarioService.registrarUsuario(nombre, correo, telefono, contrasena, rol);
     }
     public List<Evento> listarEventos(){
         return eventoService.consultarEventos();

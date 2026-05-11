@@ -1,6 +1,7 @@
 package co.edu.uniquindio.stagepass.model.objects;
 
 import co.edu.uniquindio.stagepass.model.Enums.EstadoAsiento;
+import co.edu.uniquindio.stagepass.model.GeneradorIds;
 
 public class Asiento {
     private String idAsiento;
@@ -11,8 +12,8 @@ public class Asiento {
 
     }
 
-    public Asiento(String idAsiento, String fila, int numero, EstadoAsiento estadoAsiento) {
-        this.idAsiento = idAsiento;
+    public Asiento(String fila, int numero, EstadoAsiento estadoAsiento) {
+        this.idAsiento = GeneradorIds.generarIdAsiento();
         this.fila = fila;
         this.numero = numero;
         this.estadoAsiento = estadoAsiento;

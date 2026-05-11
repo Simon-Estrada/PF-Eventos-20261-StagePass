@@ -3,6 +3,7 @@ package co.edu.uniquindio.stagepass.model.objects;
 
 import co.edu.uniquindio.stagepass.model.Enums.Categoria;
 import co.edu.uniquindio.stagepass.model.Enums.EstadoEvento;
+import co.edu.uniquindio.stagepass.model.GeneradorIds;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -20,8 +21,8 @@ public class Evento {
     private PoliticaReembolso politicaReembolso;
     private Recinto recinto;
 
-    public Evento(String idEvento, String nombre, Categoria categoria, String ciudad, String descripcion, LocalDate fecha, LocalTime hora) {
-        this.idEvento = idEvento;
+    public Evento(String nombre, Categoria categoria, String ciudad, String descripcion, LocalDate fecha, LocalTime hora) {
+        this.idEvento = GeneradorIds.generarIdEvento();
         this.nombre = nombre;
         this.categoria = categoria;
         this.ciudad = ciudad;
