@@ -1,5 +1,6 @@
 package co.edu.uniquindio.stagepass.model.servicesimp;
 
+import co.edu.uniquindio.stagepass.model.Enums.EstadoAsiento;
 import co.edu.uniquindio.stagepass.model.objects.Asiento;
 import co.edu.uniquindio.stagepass.model.objects.Zona;
 import co.edu.uniquindio.stagepass.model.services.ZonaService;
@@ -85,7 +86,7 @@ public class ZonaServiceImp implements ZonaService {
         int capacidad= zona.getCapacidad();
         int asientosOcupados= 0;
         for(Asiento asiento: zona.getAsientos()){
-            if(asiento.getEstado()==EstadoAsiento.VENDIDO||asiento.getEstado()==EstadoAsiento.RESERVADO){
+            if(asiento.getEstadoAsiento()== EstadoAsiento.VENDIDO||asiento.getEstadoAsiento()==EstadoAsiento.RESERVADO){
                 asientosOcupados++;
             }
         }

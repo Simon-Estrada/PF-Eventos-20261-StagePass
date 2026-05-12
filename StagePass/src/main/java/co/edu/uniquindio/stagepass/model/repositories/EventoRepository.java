@@ -3,6 +3,7 @@ package co.edu.uniquindio.stagepass.model.repositories;
 import co.edu.uniquindio.stagepass.model.objects.Evento;
 
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -36,5 +37,22 @@ public class EventoRepository {
     }
     public List<Evento> obtenerTodo(){
         return new ArrayList<>(datos.values());
+    }
+
+    public List<Evento> filtrarPorFecha(LocalDate fecha) {
+        List<Evento> eventosFiltrados = new ArrayList<>();
+
+        for (Evento evento : eventos) {
+
+            if (evento.getFechaHora()
+                    .toLocalDate()
+                    .equals(fecha)) {
+
+                eventosFiltrados.add(evento);
+            }
+        }
+
+        return eventosFiltrados;
+
     }
 }

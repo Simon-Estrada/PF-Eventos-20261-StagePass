@@ -1,6 +1,7 @@
 package co.edu.uniquindio.stagepass.model.servicesimp;
 
 import co.edu.uniquindio.stagepass.model.Enums.Categoria;
+import co.edu.uniquindio.stagepass.model.Enums.EstadoAsiento;
 import co.edu.uniquindio.stagepass.model.Enums.EstadoEvento;
 import co.edu.uniquindio.stagepass.model.objects.Asiento;
 import co.edu.uniquindio.stagepass.model.objects.Evento;
@@ -167,7 +168,7 @@ public class EventoServiceImp implements EventoService {
 
                 return zona.getAsientos()
                         .stream()
-                        .filter(a -> a.getEstado() == EstadoAsiento.DISPONIBLE)
+                        .filter(a -> a.getEstadoAsiento() == EstadoAsiento.DISPONIBLE)
                         .toList();
             }
         }
