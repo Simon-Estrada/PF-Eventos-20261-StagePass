@@ -58,7 +58,6 @@ public class CompraServiceImp implements CompraService {
         for (ItemCompra item : itemsCompra) {
             Asiento asiento = item.getAsiento();
             Zona zonaAsiento = null;
-            // Buscar la zona del asiento en el recinto del evento
             if (evento.getRecinto() != null && evento.getRecinto().getZonas() != null) {
                 for (Zona zona : evento.getRecinto().getZonas()) {
                     if (zona.getAsientos().contains(asiento)) {

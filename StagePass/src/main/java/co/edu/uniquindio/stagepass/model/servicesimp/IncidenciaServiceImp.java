@@ -19,7 +19,7 @@ public class IncidenciaServiceImp implements IncidenciaService {
     }
 
     private void validarAdministrador(Usuario usuario) {
-        if (usuario == null || usuario.getRol() != Rol.ADMINISTRADOR) {
+        if (usuario == null || usuario.getRol() != Rol.ADMIN) {
             throw new RuntimeException("Acceso denegado: Solo los administradores pueden realizar esta acción.");
         }
     }

@@ -10,14 +10,13 @@ public class ReporteCancelacion extends ReporteTemplate {
 
     @Override
     protected Object obtenerDatos() {
-        // En una implementación real, se revisarían las incidencias 
-        // de tipo Cancelación y las Compras en estado Cancelado.
+
         return "Datos crudos: 100 Compras Totales, 5 Compras Canceladas";
     }
 
     @Override
     protected Object procesarDatos(Object datos) {
-        // Lógica de cálculo de porcentaje
+
         return "--- REPORTE TASA DE CANCELACION ---\n"
              + "Total de Compras Realizadas: 100\n"
              + "Total de Compras Canceladas: 5\n"

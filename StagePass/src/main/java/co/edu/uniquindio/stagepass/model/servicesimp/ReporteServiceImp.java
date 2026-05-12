@@ -12,8 +12,7 @@ public class ReporteServiceImp implements ReporteService {
 
     @Override
     public byte[] generarReporte(TipoReporte tipo, FormatoReporte formato, LocalDate inicio, LocalDate fin) {
-        
-        // 1. Instanciar el Template base según el Tipo (aplicación de Template Method)
+
         Reporte reporteBase;
         switch (tipo) {
             case VENTAS_PERIODO:
@@ -29,7 +28,6 @@ public class ReporteServiceImp implements ReporteService {
                 throw new IllegalArgumentException("Tipo de reporte no soportado: " + tipo);
         }
 
-        // 2. Aplicar el Decorador según el Formato (aplicación de Decorator Pattern)
         Reporte reporteDecorado;
         if (formato == FormatoReporte.CSV) {
             reporteDecorado = new ReporteCSV(reporteBase);
@@ -39,8 +37,6 @@ public class ReporteServiceImp implements ReporteService {
             throw new IllegalArgumentException("Formato no soportado: " + formato);
         }
 
-        // 3. Generar el reporte final
-        // Esto invoca la secuencia: ReportePDF/CSV -> ReporteTemplate -> obtenerDatos() -> procesarDatos() -> formatear()
         return reporteDecorado.generar();
     }
 }
