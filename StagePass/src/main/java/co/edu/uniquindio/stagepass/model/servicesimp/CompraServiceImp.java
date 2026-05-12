@@ -7,6 +7,7 @@ import co.edu.uniquindio.stagepass.model.ReembolsadaState;
 import co.edu.uniquindio.stagepass.model.objects.Compra;
 import co.edu.uniquindio.stagepass.model.objects.Evento;
 import co.edu.uniquindio.stagepass.model.objects.ItemCompra;
+import co.edu.uniquindio.stagepass.model.objects.ServicioAdicional;
 import co.edu.uniquindio.stagepass.model.objects.Usuario;
 
 import co.edu.uniquindio.stagepass.model.repositories.CompraRepository;

@@ -9,10 +9,12 @@ import co.edu.uniquindio.stagepass.model.objects.Entrada;
 import co.edu.uniquindio.stagepass.model.objects.ItemCompra;
 import co.edu.uniquindio.stagepass.model.repositories.EntradaRepository;
 
+import co.edu.uniquindio.stagepass.model.services.EntradaService;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class EntradaService {
+public class EntradaServiceImp implements EntradaService {
     private final EntradaRepository entradaRepository;
 
     public EntradaService(EntradaRepository entradaRepository) {

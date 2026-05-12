@@ -2,7 +2,6 @@ package co.edu.uniquindio.stagepass.model.repositories;
 
 import co.edu.uniquindio.stagepass.model.objects.Evento;
 
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,42 +10,46 @@ import java.util.Map;
 
 public class EventoRepository {
     private Map<String, Evento> datos;
-    public EventoRepository(){
-        datos= new HashMap<>();
+
+    public EventoRepository() {
+        datos = new HashMap<>();
     }
-    public Evento guardar(Evento evento){
+
+    public Evento guardar(Evento evento) {
         datos.put(evento.getIdEvento(), evento);
         return evento;
     }
-    public Evento buscarPorId(String idEvento){
+
+    public Evento buscarPorId(String idEvento) {
         return datos.get(idEvento);
     }
-    public void actualizar(Evento evento){
-        if(!datos.containsKey(evento.getIdEvento())){
+
+    public void actualizar(Evento evento) {
+        if (!datos.containsKey(evento.getIdEvento())) {
             throw new IllegalArgumentException("el evento no existe.");
         }
-        datos.put(evento.getIdEvento(),evento);
+        datos.put(evento.getIdEvento(), evento);
 
     }
-    public void eliminar(String idEvento){
-        if(!datos.containsKey(idEvento)){
+
+    public void eliminar(String idEvento) {
+        if (!datos.containsKey(idEvento)) {
             throw new IllegalArgumentException("El evento no existe.");
         }
 
         datos.remove(idEvento);
     }
-    public List<Evento> obtenerTodo(){
+
+    public List<Evento> obtenerTodo() {
         return new ArrayList<>(datos.values());
     }
 
     public List<Evento> filtrarPorFecha(LocalDate fecha) {
         List<Evento> eventosFiltrados = new ArrayList<>();
 
-        for (Evento evento : eventos) {
+        for (Evento evento : datos.values()) {
 
-            if (evento.getFechaHora()
-                    .toLocalDate()
-                    .equals(fecha)) {
+            if (evento.getFecha().equals(fecha)) {
 
                 eventosFiltrados.add(evento);
             }
