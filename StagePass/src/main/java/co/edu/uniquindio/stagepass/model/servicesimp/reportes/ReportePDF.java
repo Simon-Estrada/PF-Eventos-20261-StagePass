@@ -12,8 +12,7 @@ public class ReportePDF extends ReporteDecorador {
     public byte[] generar() {
         byte[] rawBytes = super.generar();
         String rawDatos = new String(rawBytes);
-        
-        // Simulación de estructura de documento PDF
+
         String pdfData = "%%% PDF-1.4 %%%\n";
         pdfData += "<< /Title (Reporte StagePass) >>\n";
         pdfData += "CONTENIDO DEL REPORTE:\n\n";

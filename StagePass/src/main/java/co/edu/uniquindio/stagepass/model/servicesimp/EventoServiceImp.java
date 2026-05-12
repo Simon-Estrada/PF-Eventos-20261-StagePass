@@ -1,13 +1,8 @@
 package co.edu.uniquindio.stagepass.model.servicesimp;
 
-import co.edu.uniquindio.stagepass.model.Enums.Categoria;
-import co.edu.uniquindio.stagepass.model.Enums.EstadoAsiento;
-import co.edu.uniquindio.stagepass.model.Enums.EstadoEvento;
+import co.edu.uniquindio.stagepass.model.Enums.*;
+import co.edu.uniquindio.stagepass.model.objects.*;
 import co.edu.uniquindio.stagepass.model.services.IncidenciaService;
-import co.edu.uniquindio.stagepass.model.objects.Asiento;
-import co.edu.uniquindio.stagepass.model.objects.Evento;
-import co.edu.uniquindio.stagepass.model.objects.Recinto;
-import co.edu.uniquindio.stagepass.model.objects.Zona;
 import co.edu.uniquindio.stagepass.model.repositories.EventoRepository;
 import co.edu.uniquindio.stagepass.model.services.EventoService;
 
@@ -21,6 +16,11 @@ import java.util.Map;
 public class EventoServiceImp implements EventoService {
     private EventoRepository eventoRepository;
     private IncidenciaService incidenciaService;
+
+    public EventoServiceImp(EventoRepository eventoRepository, IncidenciaService incidenciaService) {
+        this.eventoRepository = eventoRepository;
+        this.incidenciaService = incidenciaService;
+    }
 
     @Override
     public Evento crearEvento(Evento evento) {
@@ -99,15 +99,21 @@ public class EventoServiceImp implements EventoService {
 
     @Override
     public void cancelarEvento(String idEvento) {
+        Usuario usuarioActual = Sesion.getInstancia().getUsuarioActual();
+        if (usuarioActual.getRol() != Rol.ADMIN) {
+            throw new IllegalArgumentException(
+                    "Solo un administrador puede cancelar eventos"
+            );
+        }
         Evento evento = buscarPorId(idEvento);
+
         if (evento.getEstado() == EstadoEvento.FINALIZADO) {
-            throw new IllegalArgumentException("No se puede cancelar este evento, ya finalizo");
+            throw new IllegalArgumentException(
+                    "No se puede cancelar este evento, ya finalizó");
         }
         evento.setEstado(EstadoEvento.CANCELADO);
-        incidenciaService.registrarIncidencia("CANCELACION_EVENTO",
-                "El evento con ID " + idEvento + " ha sido cancelado.");
+        incidenciaService.registrarIncidenciaEvento(usuarioActual, idEvento, TipoIncidencia.CANCELACION_EVENTO, "El evento " + evento.getNombre() + " fue cancelado");
         eventoRepository.actualizar(evento);
-
     }
 
     @Override
