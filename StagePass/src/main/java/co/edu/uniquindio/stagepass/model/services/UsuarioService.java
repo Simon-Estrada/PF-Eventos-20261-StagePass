@@ -1,8 +1,9 @@
 package co.edu.uniquindio.stagepass.model.services;
 
 import co.edu.uniquindio.stagepass.model.Enums.Rol;
-import co.edu.uniquindio.stagepass.model.MetodoPagoUsuario;
 import co.edu.uniquindio.stagepass.model.objects.Usuario;
+import co.edu.uniquindio.stagepass.model.objects.Compra;
+import co.edu.uniquindio.stagepass.model.MetodoPagoUsuario;
 
 import java.util.List;
 

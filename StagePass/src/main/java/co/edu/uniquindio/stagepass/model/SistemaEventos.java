@@ -9,6 +9,7 @@ import co.edu.uniquindio.stagepass.model.services.AuthService;
 import co.edu.uniquindio.stagepass.model.services.CompraService;
 import co.edu.uniquindio.stagepass.model.services.EventoService;
 import co.edu.uniquindio.stagepass.model.services.UsuarioService;
+import co.edu.uniquindio.stagepass.model.services.ReporteService;
 
 import java.util.List;
 //Esta clase funciona con el Patron Facade puesto que centraliza el acceso
@@ -25,7 +26,7 @@ public class SistemaEventos {
 
     private SistemaEventos(){}
 
-    public SistemaEventos getInstance() {
+    public static SistemaEventos getInstance() {
         if(instance==null){
             instance = new SistemaEventos();
         }

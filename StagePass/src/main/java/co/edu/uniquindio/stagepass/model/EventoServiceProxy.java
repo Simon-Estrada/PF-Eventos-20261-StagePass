@@ -13,6 +13,11 @@ public class EventoServiceProxy implements EventoService {
     private EventoService real;
     private Sesion sesion;
 
+    public EventoServiceProxy(EventoService real, Sesion sesion) {
+        this.real = real;
+        this.sesion = sesion;
+    }
+
     private void validarAdmin(){
         if(sesion==null||!sesion.estaActiva()){
             throw new RuntimeException("La sesion no esta activa.");
