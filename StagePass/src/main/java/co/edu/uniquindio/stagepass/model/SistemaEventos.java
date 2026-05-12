@@ -1,9 +1,12 @@
 package co.edu.uniquindio.stagepass.model;
 
 import co.edu.uniquindio.stagepass.model.Enums.Rol;
+import co.edu.uniquindio.stagepass.model.objects.Compra;
 import co.edu.uniquindio.stagepass.model.objects.Evento;
+import co.edu.uniquindio.stagepass.model.objects.ItemCompra;
 import co.edu.uniquindio.stagepass.model.objects.Usuario;
 import co.edu.uniquindio.stagepass.model.services.AuthService;
+import co.edu.uniquindio.stagepass.model.services.CompraService;
 import co.edu.uniquindio.stagepass.model.services.EventoService;
 import co.edu.uniquindio.stagepass.model.services.UsuarioService;
 
@@ -42,8 +45,8 @@ public class SistemaEventos {
     public List<Evento> listarEventos(){
         return eventoService.consultarEventos();
     }
-    public Compra crearCompra(Usuario usuario, Evento evento){
-        return compraService.crearCompra(usuario, evento);
+    public Compra crearCompra(Usuario usuario, Evento evento, List<ItemCompra> itemsCompra){
+        return compraService.crearCompra(usuario, evento, itemsCompra);
     }
     public byte[] generarReporteVentas() {
         return reporteService.generarReporte();

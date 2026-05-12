@@ -1,10 +1,14 @@
 package co.edu.uniquindio.stagepass.model.servicesimp.pagos;
 
+import co.edu.uniquindio.stagepass.model.CreadaState;
 import co.edu.uniquindio.stagepass.model.Enums.EstadoPago;
 import co.edu.uniquindio.stagepass.model.GeneradorIds;
 import co.edu.uniquindio.stagepass.model.MetodoPagoUsuario;
+import co.edu.uniquindio.stagepass.model.PagadaState;
 import co.edu.uniquindio.stagepass.model.factories.MetodoPagoFactory;
+import co.edu.uniquindio.stagepass.model.objects.Compra;
 import co.edu.uniquindio.stagepass.model.objects.Pago;
+import co.edu.uniquindio.stagepass.model.repositories.CompraRepository;
 import co.edu.uniquindio.stagepass.model.repositories.PagoRepository;
 import co.edu.uniquindio.stagepass.model.services.MetodoPago;
 
@@ -35,7 +39,7 @@ public class PagoService {
         if (!metodoPagoUsuario.isActivo()) {
             throw new RuntimeException("El método de pago está inactivo");
         }
-        if (compra.getEstadoCompra() != EstadoCompra.CREADA) {
+        if (!(compra.getEstado() instanceof CreadaState)) {
             throw new RuntimeException("La compra ya fue procesada");
         }
         MetodoPago metodoPago =
@@ -53,7 +57,7 @@ public class PagoService {
         Pago pago = new Pago(GeneradorIds.generarIdPago(), compra, compra.getTotal(), LocalDateTime.now(), EstadoPago.APROBADO, metodoPagoUsuario
         );
 
-        compra.setEstadoCompra(EstadoCompra.PAGADA);
+        compra.setEstado(new PagadaState());
         pagoRepository.guardar(pago);
         compraRepository.actualizar(compra);
         return pago;

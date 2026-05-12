@@ -30,7 +30,7 @@ public class PagoRepository {
     public List<Pago> listarPagoUsuario(String idUsuario) {
         List<Pago> pagosUsuario = new ArrayList<>();
         for (Pago pago : pagos) {
-            if (pago.getCompra().getUsuario().getId().equals(idUsuario)) {
+            if (pago.getCompra().getUsuario().getIdUsuario().equals(idUsuario)) {
                 pagosUsuario.add(pago);
             }
         }

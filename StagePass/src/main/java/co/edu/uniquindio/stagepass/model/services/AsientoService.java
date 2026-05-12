@@ -1,5 +1,6 @@
 package co.edu.uniquindio.stagepass.model.services;
 
+import co.edu.uniquindio.stagepass.model.Enums.EstadoAsiento;
 import co.edu.uniquindio.stagepass.model.objects.Asiento;
 
 import java.util.List;

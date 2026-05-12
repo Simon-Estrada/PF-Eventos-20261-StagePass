@@ -1,5 +1,6 @@
 package co.edu.uniquindio.stagepass.model.servicesimp;
 
+import co.edu.uniquindio.stagepass.model.Enums.EstadoAsiento;
 import co.edu.uniquindio.stagepass.model.objects.Asiento;
 import co.edu.uniquindio.stagepass.model.objects.Zona;
 import co.edu.uniquindio.stagepass.model.services.AsientoService;
@@ -31,7 +32,7 @@ public class AsientoServiceImp implements AsientoService {
         Asiento existe = buscarAsiento(zona, asiento.getIdAsiento());
         existe.setFila(asiento.getFila());
         existe.setNumero(asiento.getNumero());
-        existe.setEstado(asiento.getEstado());
+        existe.setEstadoAsiento(asiento.getEstadoAsiento());
 
     }
 
@@ -47,7 +48,7 @@ public class AsientoServiceImp implements AsientoService {
     public void cambiarEstado(String idZona, String idAsiento, EstadoAsiento estado) {
         Zona zona= zonaService.buscarPorId(idZona);
         Asiento asiento=buscarAsiento(zona, idAsiento);
-        asiento.setEstado(estado);
+        asiento.setEstadoAsiento(estado);
 
     }
 
