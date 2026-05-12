@@ -10,6 +10,9 @@ import co.edu.uniquindio.stagepass.model.services.CompraService;
 import co.edu.uniquindio.stagepass.model.services.EventoService;
 import co.edu.uniquindio.stagepass.model.services.UsuarioService;
 import co.edu.uniquindio.stagepass.model.services.ReporteService;
+import co.edu.uniquindio.stagepass.model.services.IncidenciaService;
+import co.edu.uniquindio.stagepass.model.objects.Incidencia;
+import co.edu.uniquindio.stagepass.model.Enums.TipoIncidencia;
 
 import java.util.List;
 //Esta clase funciona con el Patron Facade puesto que centraliza el acceso
@@ -24,6 +27,8 @@ public class SistemaEventos {
     private ReporteService reporteService;
     private AuthService authService;
 
+    private IncidenciaService incidenciaService;
+
     private SistemaEventos(){}
 
     public static SistemaEventos getInstance() {
@@ -33,12 +38,13 @@ public class SistemaEventos {
         return instance;
     }
 
-    public void initialize(UsuarioService usuarioService, EventoService eventoService, CompraService compraService, ReporteService reporteService, AuthService authService) {
+    public void initialize(UsuarioService usuarioService, EventoService eventoService, CompraService compraService, ReporteService reporteService, AuthService authService, IncidenciaService incidenciaService) {
         this.usuarioService = usuarioService;
         this.eventoService = eventoService;
         this.compraService = compraService;
         this.reporteService = reporteService;
         this.authService = authService;
+        this.incidenciaService = incidenciaService;
     }
     public Usuario registrarUsuario(String nombre, String correo, String telefono, String contrasena, Rol rol){
         return usuarioService.registrarUsuario(nombre, correo, telefono, contrasena, rol);
@@ -49,7 +55,7 @@ public class SistemaEventos {
     public Compra crearCompra(Usuario usuario, Evento evento, List<ItemCompra> itemsCompra){
         return compraService.crearCompra(usuario, evento, itemsCompra);
     }
-    public byte[] generarReporteVentas() {
-        return reporteService.generarReporte();
+    public byte[] generarReporte(co.edu.uniquindio.stagepass.model.Enums.TipoReporte tipo, co.edu.uniquindio.stagepass.model.Enums.FormatoReporte formato, java.time.LocalDate inicio, java.time.LocalDate fin) {
+        return reporteService.generarReporte(tipo, formato, inicio, fin);
     }
 }

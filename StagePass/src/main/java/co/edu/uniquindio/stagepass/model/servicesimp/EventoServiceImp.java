@@ -3,7 +3,7 @@ package co.edu.uniquindio.stagepass.model.servicesimp;
 import co.edu.uniquindio.stagepass.model.Enums.Categoria;
 import co.edu.uniquindio.stagepass.model.Enums.EstadoAsiento;
 import co.edu.uniquindio.stagepass.model.Enums.EstadoEvento;
-import co.edu.uniquindio.stagepass.model.IncidenciaService;
+import co.edu.uniquindio.stagepass.model.services.IncidenciaService;
 import co.edu.uniquindio.stagepass.model.objects.Asiento;
 import co.edu.uniquindio.stagepass.model.objects.Evento;
 import co.edu.uniquindio.stagepass.model.objects.Recinto;

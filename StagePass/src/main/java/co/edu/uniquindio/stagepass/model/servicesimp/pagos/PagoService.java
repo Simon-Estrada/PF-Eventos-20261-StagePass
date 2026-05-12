@@ -11,6 +11,7 @@ import co.edu.uniquindio.stagepass.model.objects.Pago;
 import co.edu.uniquindio.stagepass.model.repositories.CompraRepository;
 import co.edu.uniquindio.stagepass.model.repositories.PagoRepository;
 import co.edu.uniquindio.stagepass.model.services.MetodoPago;
+import co.edu.uniquindio.stagepass.model.services.IncidenciaService;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -48,8 +49,9 @@ public class PagoService {
         boolean pagoExitoso =
                 metodoPago.procesarPago(compra.getTotal(), metodoPagoUsuario);
         if (!pagoExitoso){
-            incidenciaService.registrarIncidencia(
-                    "PAGO_RECHAZADO",
+            incidenciaService.registrarIncidenciaAutomatica(
+                    compra.getIdCompra(),
+                    co.edu.uniquindio.stagepass.model.Enums.TipoIncidencia.FRAUDE_PAGO,
                     "El pago no pudo procesarse"
             );
             throw new RuntimeException("El pago fue rechazado");

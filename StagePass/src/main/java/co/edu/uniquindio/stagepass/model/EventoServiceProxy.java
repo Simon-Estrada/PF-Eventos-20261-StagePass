@@ -18,14 +18,15 @@ public class EventoServiceProxy implements EventoService {
         this.sesion = sesion;
     }
 
-    private void validarAdmin(){
-        if(sesion==null||!sesion.estaActiva()){
+    private void validarAdmin() {
+        if (sesion == null || !sesion.estaActiva()) {
             throw new RuntimeException("La sesion no esta activa.");
         }
-        if(sesion.getUsuarioActual().getRol()!= Rol.ADMIN){
+        if (sesion.getUsuarioActual().getRol() != Rol.ADMIN) {
             throw new RuntimeException("Acceso denegado");
         }
     }
+
     private void validarSesion() {
 
         if (sesion == null || !sesion.estaActiva()) {
@@ -53,8 +54,8 @@ public class EventoServiceProxy implements EventoService {
 
     @Override
     public List<Evento> consultarEventos() {
-       validarSesion();
-       return real.consultarEventos();
+        validarSesion();
+        return real.consultarEventos();
     }
 
     @Override
@@ -135,9 +136,4 @@ public class EventoServiceProxy implements EventoService {
         return real.filtrarPorFecha(fecha);
     }
 
-    @Override
-    public List<Evento> filtrarPorPrecio(double min, double max) {
-        validarSesion();
-        return real.filtrarPorPrecio(min, max);
-    }
 }
