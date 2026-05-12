@@ -9,6 +9,10 @@ import co.edu.uniquindio.stagepass.model.objects.Evento;
 import co.edu.uniquindio.stagepass.model.objects.ItemCompra;
 import co.edu.uniquindio.stagepass.model.objects.ServicioAdicional;
 import co.edu.uniquindio.stagepass.model.objects.Usuario;
+import co.edu.uniquindio.stagepass.model.objects.Entrada;
+import co.edu.uniquindio.stagepass.model.objects.Asiento;
+import co.edu.uniquindio.stagepass.model.objects.Zona;
+import co.edu.uniquindio.stagepass.model.Enums.EstadoEntrada;
 
 import co.edu.uniquindio.stagepass.model.repositories.CompraRepository;
 import co.edu.uniquindio.stagepass.model.services.CompraService;
@@ -38,6 +42,7 @@ public class CompraServiceImp implements CompraService {
                     "La compra debe tener al menos un item"
             );
         }
+        List<Entrada> entradas = new ArrayList<>();
         Compra compra = Compra.builder()
                 .idCompra(GeneradorIds.generarIdCompra())
                 .usuario(usuario)
@@ -46,8 +51,35 @@ public class CompraServiceImp implements CompraService {
                 .estado(new CreadaState())
                 .itemsCompra(itemsCompra)
                 .serviciosAdicionales(new ArrayList<>())
+                .entradas(entradas)
                 .total(0)
                 .build();
+
+        for (ItemCompra item : itemsCompra) {
+            Asiento asiento = item.getAsiento();
+            Zona zonaAsiento = null;
+            // Buscar la zona del asiento en el recinto del evento
+            if (evento.getRecinto() != null && evento.getRecinto().getZonas() != null) {
+                for (Zona zona : evento.getRecinto().getZonas()) {
+                    if (zona.getAsientos().contains(asiento)) {
+                        zonaAsiento = zona;
+                        break;
+                    }
+                }
+            }
+            
+            Entrada entrada = new Entrada(
+                    GeneradorIds.generarIdEntrada(),
+                    evento,
+                    zonaAsiento,
+                    asiento,
+                    compra,
+                    item.getPrecio(),
+                    EstadoEntrada.ACTIVA
+            );
+            entradas.add(entrada);
+        }
+
         calcularTotal(compra);
         return compraRepository.guardar(compra);
     }
@@ -116,7 +148,7 @@ public class CompraServiceImp implements CompraService {
     private void calcularTotal(Compra compra) {
         double total = 0;
         for (ItemCompra item : compra.getItemsCompra()) {
-            total += item.getSubtotal();
+            total += item.getPrecio();
         }
         for (ServicioAdicional servicio : compra.getServiciosAdicionales()) {
             total += servicio.getPrecio();

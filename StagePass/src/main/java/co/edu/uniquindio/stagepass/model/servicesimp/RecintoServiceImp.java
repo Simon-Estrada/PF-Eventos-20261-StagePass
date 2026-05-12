@@ -73,7 +73,10 @@ public class RecintoServiceImp implements RecintoService {
         if (zona == null) {
             throw new IllegalArgumentException("La zona es nula.");
         }
-        recinto.setZonas().add(zona);
+        if (recinto.getZonas() == null) {
+            recinto.setZonas(new java.util.ArrayList<>());
+        }
+        recinto.getZonas().add(zona);
         recintoRepository.actualizar(recinto);
 
 
@@ -87,6 +90,9 @@ public class RecintoServiceImp implements RecintoService {
             throw new IllegalArgumentException("El recinto no existe.");
         }
 
+        if (recinto.getZonas() == null) {
+            recinto.setZonas(new java.util.ArrayList<>());
+        }
         recinto.getZonas().remove(zona);
 
         recintoRepository.actualizar(recinto);

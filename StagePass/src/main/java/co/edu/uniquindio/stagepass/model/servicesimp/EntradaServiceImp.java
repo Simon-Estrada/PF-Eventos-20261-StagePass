@@ -7,6 +7,7 @@ import co.edu.uniquindio.stagepass.model.PagadaState;
 import co.edu.uniquindio.stagepass.model.objects.Compra;
 import co.edu.uniquindio.stagepass.model.objects.Entrada;
 import co.edu.uniquindio.stagepass.model.objects.ItemCompra;
+import co.edu.uniquindio.stagepass.model.objects.Zona;
 import co.edu.uniquindio.stagepass.model.repositories.EntradaRepository;
 
 import co.edu.uniquindio.stagepass.model.services.EntradaService;
@@ -17,7 +18,7 @@ import java.util.List;
 public class EntradaServiceImp implements EntradaService {
     private final EntradaRepository entradaRepository;
 
-    public EntradaService(EntradaRepository entradaRepository) {
+    public EntradaServiceImp(EntradaRepository entradaRepository) {
         this.entradaRepository = entradaRepository;
     }
 
@@ -31,13 +32,24 @@ public class EntradaServiceImp implements EntradaService {
         }
         List<Entrada> entradasGeneradas = new ArrayList<>();
         for (ItemCompra item : compra.getItemsCompra()) {
+            Zona zonaAsiento = null;
+            if (compra.getEvento() != null && compra.getEvento().getRecinto() != null && compra.getEvento().getRecinto().getZonas() != null) {
+                for (Zona zona : compra.getEvento().getRecinto().getZonas()) {
+                    if (zona.getAsientos() != null && zona.getAsientos().contains(item.getAsiento())) {
+                        zonaAsiento = zona;
+                        break;
+                    }
+                }
+            }
+            
             Entrada entrada = new Entrada(
                     GeneradorIds.generarIdEntrada(),
                     compra.getEvento(),
-                    item.getZona(),
+                    zonaAsiento,
                     item.getAsiento(),
                     compra,
-                    item.getPrecioFinal()
+                    item.getPrecio(),
+                    EstadoEntrada.ACTIVA
             );
             if (item.getAsiento() != null) {
                 item.getAsiento().setEstadoAsiento(EstadoAsiento.VENDIDO);

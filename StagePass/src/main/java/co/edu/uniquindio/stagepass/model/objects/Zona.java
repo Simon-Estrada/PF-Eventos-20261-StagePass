@@ -14,7 +14,7 @@ public class Zona {
 
     public Zona(List<Asiento> asientos, double precioBase, int capacidad, String nombre) {
         this.idZona = GeneradorIds.generarIdZona();
-        this.asientos = new ArrayList<>();
+        this.asientos = (asientos != null) ? asientos : new ArrayList<>();
         this.precioBase = precioBase;
         this.capacidad = capacidad;
         this.nombre = nombre;

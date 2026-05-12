@@ -2,6 +2,7 @@ package co.edu.uniquindio.stagepass.model.servicesimp;
 
 import co.edu.uniquindio.stagepass.model.Enums.Rol;
 import co.edu.uniquindio.stagepass.model.MetodoPagoUsuario;
+import co.edu.uniquindio.stagepass.model.objects.Compra;
 import co.edu.uniquindio.stagepass.model.objects.Usuario;
 import co.edu.uniquindio.stagepass.model.repositories.UsuarioRepository;
 import co.edu.uniquindio.stagepass.model.services.UsuarioService;
@@ -89,7 +90,7 @@ public class UsuarioServiceImp implements UsuarioService {
         if (usuario == null) {
             throw new RuntimeException("Usuario no encontrado");
         }
-        usuario.getMetodosPago().removeIf(metodo -> metodo.getIdMetodoPago().equals(idMetodoPago)
+        usuario.getMetodosPago().removeIf(metodo -> metodo.getId().equals(idMetodoPago)
         );
         usuarioRepository.actualizar(usuario);
 

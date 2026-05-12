@@ -1,6 +1,7 @@
 package co.edu.uniquindio.stagepass.model.repositories;
 
 import co.edu.uniquindio.stagepass.model.objects.Evento;
+import co.edu.uniquindio.stagepass.model.Enums.Categoria;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -58,4 +59,35 @@ public class EventoRepository {
         return eventosFiltrados;
 
     }
+
+    public List<Evento> filtrarPorCiudad(String ciudad) {
+        List<Evento> eventosFiltrados = new ArrayList<>();
+
+        for (Evento evento : datos.values()) {
+
+            if (evento.getRecinto().getCiudad().equals(ciudad)) {
+
+                eventosFiltrados.add(evento);
+            }
+        }
+
+        return eventosFiltrados;
+
+    }
+
+    public List<Evento> filtrarPorCategoria(Categoria categoria) {
+        List<Evento> eventosFiltrados = new ArrayList<>();
+
+        for (Evento evento : datos.values()) {
+
+            if (evento.getCategoria().equals(categoria)) {
+
+                eventosFiltrados.add(evento);
+            }
+        }
+
+        return eventosFiltrados;
+
+    }
+
 }

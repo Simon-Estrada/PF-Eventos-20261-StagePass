@@ -16,6 +16,7 @@ public class Recinto {
         this.nombre = nombre;
         this.direccion = direccion;
         this.ciudad = ciudad;
+        this.zonas = new java.util.ArrayList<>();
     }
 
     public String getIdRecinto() {
